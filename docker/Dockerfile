@@ -19,7 +19,17 @@ RUN groupadd --gid $USER_GID $USERNAME \
     && chmod 0440 /etc/sudoers.d/$USERNAME
 RUN apt-get update && apt-get upgrade -y
 RUN apt-get install -y python3-pip
+
+RUN usermod -aG dialout $USERNAME
+
 ENV SHELL /bin/bash
+
+# Set up the entrypoint
+COPY entrypoint.sh /
+ENTRYPOINT [ "/entrypoint.sh" ]
+
+# Copy useful scripts
+COPY setup.sh /
 
 # ********************************************************
 # * Anything else you want to do like clean up goes here *
@@ -28,3 +38,5 @@ ENV SHELL /bin/bash
 # [Optional] Set the default user. Omit if you want to keep the default as root.
 USER $USERNAME
 CMD ["/bin/bash"]
+
+RUN echo "source /setup.sh" >> /home/${USERNAME}/.bashrc
