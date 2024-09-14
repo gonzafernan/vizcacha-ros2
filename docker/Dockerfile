@@ -1,6 +1,6 @@
 ARG ROS_DISTRO=humble
 
-FROM ros:${ROS_DISTRO}
+FROM osrf/ros:${ROS_DISTRO}-desktop-full
 ARG USERNAME=USERNAME
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
@@ -19,6 +19,9 @@ RUN groupadd --gid $USER_GID $USERNAME \
     && chmod 0440 /etc/sudoers.d/$USERNAME
 RUN apt-get update && apt-get upgrade -y
 RUN apt-get install -y python3-pip
+
+# Install useful tools
+RUN apt install -y ros-$ROS_DISTRO-plotjuggler-ros
 
 RUN usermod -aG dialout $USERNAME
 
