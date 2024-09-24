@@ -21,6 +21,8 @@ RUN apt-get update && apt-get upgrade -y
 RUN apt-get install -y python3-pip
 
 # Install useful tools
+RUN apt install -y ros-$ROS_DISTRO-joint-state-publisher-gui
+RUN apt install -y ros-$ROS_DISTRO-xacro
 RUN apt install -y ros-$ROS_DISTRO-plotjuggler-ros
 
 RUN usermod -aG dialout $USERNAME
