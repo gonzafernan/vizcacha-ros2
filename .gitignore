@@ -3,5 +3,8 @@ log/
 install/
 build/
 
+# Python
+.venv/
+
 # VS Code
 .vscode/
