@@ -1,0 +1,51 @@
+services:
+  # Base image containing dependencies.
+  base:
+    image: vizcacha_robot:dev
+    build:
+      context: docker/
+      dockerfile: Dockerfile
+      args:
+        ROS_DISTRO: humble
+    user: "${UID}:${GID}"
+    # Interactive shell
+    stdin_open: true
+    tty: true
+    # Networking and IPC for ROS 2
+    network_mode: host
+    ipc: host
+    # Needed to display graphical applications
+    privileged: true
+    environment:
+      # Allows graphical programs in the container.
+      - DISPLAY=${DISPLAY}
+      - QT_QPA_PLATFORM=xcb
+      - XDG_RUNTIME_DIR=/tmp
+      - WAYLAND_DISPLAY=${WAYLAND_DISPLAY}
+    volumes:
+      # Mount the source code
+      - ./:/ws/:rw
+      # Allows same devices as host
+      - /dev:/dev:rw
+      # Allows graphical programs in the container.
+      - $XDG_RUNTIME_DIR/$WAYLAND_DISPLAY:/tmp/$WAYLAND_DISPLAY
+      - ${XAUTHORITY:-$HOME/.Xauthority}:/root/.Xauthority
+  # Dev container
+  dev:
+    extends: base
+    volumes:
+      # Mount the source code
+      - ./:/ws/:rw
+      # Mount colcon build artifacts for faster rebuilds
+      - ./.colcon/build/:/ws/build/:rw
+      - ./.colcon/install/:/ws/install/:rw
+      - ./.colcon/log/:/ws/log/:rw
+    command: sleep infinity
+  # Display robot
+  display-robot:
+    extends: base
+    command: ros2 launch vizcc_description display.launch.py
+  # Bring-up micro-ROS communication
+  micro-ros-comm:
+    extends: base
+    command: ros2 run micro_ros_agent micro_ros_agent serial -b 115200 --dev /dev/ttyACM0

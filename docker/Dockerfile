@@ -1,47 +1,62 @@
 ARG ROS_DISTRO=humble
 
-FROM osrf/ros:${ROS_DISTRO}-desktop-full
-ARG USERNAME=USERNAME
-ARG USER_UID=1000
-ARG USER_GID=$USER_UID
+#################################
+# Base Image for Vizcacha Robot #
+#################################
 
-# Delete user if it exists in container (e.g Ubuntu Noble: ubuntu)
-RUN if id -u $USER_UID ; then userdel `id -un $USER_UID` ; fi
+FROM osrf/ros:${ROS_DISTRO}-desktop-full AS base
+SHELL ["/bin/bash", "-c"]
 
-# Create the user
-RUN groupadd --gid $USER_GID $USERNAME \
-    && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME \
-    #
-    # [Optional] Add sudo support. Omit if you don't need to install software after connecting.
-    && apt-get update \
-    && apt-get install -y sudo \
-    && echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
-    && chmod 0440 /etc/sudoers.d/$USERNAME
-RUN apt-get update && apt-get upgrade -y
-RUN apt-get install -y python3-pip
+# Create Colcon workspace with external dependencies
+RUN mkdir -p /ws/src
+# WORKDIR /ws/src
+# COPY ros2.repos .
+# RUN vcs import < ros2.repos
+
+# Build the base Colcon workspace, installing dependencies first
+WORKDIR /ws
+
+RUN source /opt/ros/${ROS_DISTRO}/setup.bash \
+    && apt-get update && apt-get upgrade -y \
+    && rosdep install --from-paths src --ignore-src --rosdistro ${ROS_DISTRO} -y \
+    && colcon build --symlink-install
 
 # Install useful tools
-RUN apt install -y ros-$ROS_DISTRO-joint-state-publisher-gui
-RUN apt install -y ros-$ROS_DISTRO-xacro
-RUN apt install -y ros-$ROS_DISTRO-plotjuggler-ros
+RUN apt install -y qtwayland5
 
-RUN usermod -aG dialout $USERNAME
-
-ENV SHELL /bin/bash
+RUN apt install -y ros-$ROS_DISTRO-joint-state-publisher-gui \
+    && apt install -y ros-$ROS_DISTRO-xacro \
+    && apt install -y ros-$ROS_DISTRO-gazebo-ros-pkgs \
+    && apt install -y ros-$ROS_DISTRO-plotjuggler-ros
 
 # Set up the entrypoint
-COPY entrypoint.sh /
+COPY ./entrypoint.sh /
 ENTRYPOINT [ "/entrypoint.sh" ]
 
-# Copy useful scripts
+#####################
+# Development Image #
+#####################
+FROM base AS dev
+
+# Dev container arguments
+ARG USERNAME=devuser
+ARG UID=1000
+ARG GID=$UID
+
+# Delete user if it exists in container (e.g Ubuntu Noble: ubuntu)
+# RUN if id -u $USER_UID ; then userdel `id -un $USER_UID` ; fi
+
+# Create new user and home directory
+RUN groupadd --gid $GID $USERNAME \
+    && useradd --uid $UID --gid $GID --create-home $USERNAME \
+    && echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
+    && chmod 0440 /etc/sudoers.d/${USERNAME} \
+    && chown -R ${UID}:${GID} /home/${USERNAME}
+
+# Give user access to serial devices
+RUN usermod -aG dialout $USERNAME
+
+USER ${USERNAME}
+
 COPY setup.sh /
-
-# ********************************************************
-# * Anything else you want to do like clean up goes here *
-# ********************************************************
-
-# [Optional] Set the default user. Omit if you want to keep the default as root.
-USER $USERNAME
-CMD ["/bin/bash"]
-
 RUN echo "source /setup.sh" >> /home/${USERNAME}/.bashrc
