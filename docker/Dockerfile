@@ -19,15 +19,14 @@ WORKDIR /ws
 RUN source /opt/ros/${ROS_DISTRO}/setup.bash \
     && apt-get update && apt-get upgrade -y \
     && rosdep install --from-paths src --ignore-src --rosdistro ${ROS_DISTRO} -y \
-    && colcon build --symlink-install
-
-# Install useful tools
-RUN apt install -y qtwayland5
-
-RUN apt install -y ros-$ROS_DISTRO-joint-state-publisher-gui \
+    && colcon build --symlink-install \
+    # Install useful tools
+    && apt install -y qtwayland5 \
+    && apt install -y ros-$ROS_DISTRO-joint-state-publisher-gui \
     && apt install -y ros-$ROS_DISTRO-xacro \
     && apt install -y ros-$ROS_DISTRO-gazebo-ros-pkgs \
-    && apt install -y ros-$ROS_DISTRO-plotjuggler-ros
+    && apt install -y ros-$ROS_DISTRO-plotjuggler-ros \
+    && apt install -y ros-$ROS_DISTRO-robot-localization
 
 # Set up the entrypoint
 COPY ./entrypoint.sh /
