@@ -58,6 +58,8 @@ def generate_launch_description():
         ],
     )
 
+    world_path = os.path.join(pkg_share, "world/example_world.sdf")
+
     return launch.LaunchDescription(
         [
             launch.actions.DeclareLaunchArgument(
@@ -85,6 +87,18 @@ def generate_launch_description():
                 name="use_sim_time",
                 default_value="True",
                 description="Flag to enable use_sim_time",
+            ),
+            launch.actions.ExecuteProcess(
+                cmd=[
+                    "gazebo",
+                    "--verbose",
+                    "-s",
+                    "libgazebo_ros_init.so",
+                    "-s",
+                    "libgazebo_ros_factory.so",
+                    world_path,
+                ],
+                output="screen",
             ),
             joint_state_publisher_node,
             robot_state_publisher_node,

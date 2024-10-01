@@ -26,7 +26,10 @@ RUN source /opt/ros/${ROS_DISTRO}/setup.bash \
     && apt install -y ros-$ROS_DISTRO-xacro \
     && apt install -y ros-$ROS_DISTRO-gazebo-ros-pkgs \
     && apt install -y ros-$ROS_DISTRO-plotjuggler-ros \
-    && apt install -y ros-$ROS_DISTRO-robot-localization
+    && apt install -y ros-$ROS_DISTRO-robot-localization \
+    && apt install -y ros-$ROS_DISTRO-slam-toolbox \
+    && apt install -y ros-$ROS_DISTRO-navigation2 \
+    && apt install -y ros-$ROS_DISTRO-nav2-bringup
 
 # Set up the entrypoint
 COPY ./entrypoint.sh /
