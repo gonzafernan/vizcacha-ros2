@@ -2,6 +2,7 @@
 log/
 install/
 build/
+.colcon/
 
 # Python
 .venv/
