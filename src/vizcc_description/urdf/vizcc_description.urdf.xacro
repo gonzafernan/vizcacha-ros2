@@ -2,8 +2,13 @@
 
 <robot name="vizcacha_robot" xmlns:xacro="http://ros.org/wiki/xacro">
 
+    <xacro:arg name="is_ignition" default="true"/>
+
     <!-- Gazebo Sim configuration -->
     <xacro:include filename="$(find vizcc_description)/urdf/vizcc_gazebo.urdf.xacro"/>
+
+    <!-- ROS 2 Control configuration -->
+    <xacro:include filename="$(find vizcc_description)/urdf/vizcc_ros2_control.urdf.xacro"/>
 
     <!-- Robot Footprint -->
     <link name="base_footprint"></link>
