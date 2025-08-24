@@ -22,6 +22,9 @@ RUN apt-get install -y \
     ros-$ROS_DISTRO-joint-state-publisher-gui \
     ros-$ROS_DISTRO-xacro \
     ros-$ROS_DISTRO-gazebo-ros-pkgs \
+    ros-$ROS_DISTRO-ros2-control \
+    ros-$ROS_DISTRO-ign-ros2-control \
+    ros-$ROS_DISTRO-ros2-controllers \
     ros-$ROS_DISTRO-robot-localization \
     ros-$ROS_DISTRO-slam-toolbox \
     ros-$ROS_DISTRO-navigation2 \
