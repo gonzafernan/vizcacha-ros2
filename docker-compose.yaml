@@ -44,7 +44,7 @@ services:
   # Display robot
   display-robot:
     extends: base
-    command: ros2 launch vizcc_description display.launch.py
+    command: ros2 launch urdf_tutorial display.launch.py model:=/ws/src/vizcc_description/urdf/vizcc_description_1.urdf.xacro
   # Bring-up micro-ROS communication
   micro-ros-comm:
     extends: base

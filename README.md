@@ -7,6 +7,12 @@ Environment setup following [Setup ROS 2 with VSCode and Docker](https://docs.ro
 ### URDF robot description
 URDF setup following [Setting Up The URDF](https://docs.nav2.org/setup_guides/urdf/setup_urdf.html)
 
+To visualize the robot with RViz the following service can be launched:
+
+```bash
+docker compose up display-robot
+```
+
 ### Robot odometry in ROS 2
 Odometry setup following [Setting Up Odometry](https://docs.nav2.org/setup_guides/odom/setup_odom.html)
 

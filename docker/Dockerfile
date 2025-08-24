@@ -17,6 +17,7 @@ RUN apt-get install -y \
     python3-colcon-common-extensions \
     qtwayland5
 RUN apt-get install -y \
+    ros-$ROS_DISTRO-urdf-tutorial \
     ros-$ROS_DISTRO-plotjuggler-ros \
     ros-$ROS_DISTRO-joint-state-publisher-gui \
     ros-$ROS_DISTRO-xacro \
