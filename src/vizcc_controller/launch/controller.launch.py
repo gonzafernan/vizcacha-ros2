@@ -15,13 +15,14 @@ def generate_launch_description():
         ],
     )
 
-    simple_controller = Node(
+    robot_controller = Node(
         package="controller_manager",
         executable="spawner",
         arguments=[
-            "simple_velocity_controller",
+            "diff_drive_controller",
             "--controller-manager",
             "/controller_manager",
         ],
     )
-    return LaunchDescription([joint_state_broadcaster_spawner, simple_controller])
+
+    return LaunchDescription([joint_state_broadcaster_spawner, robot_controller])
