@@ -1,16 +1,13 @@
 controller_manager:
   ros__parameters:
     update_rate: 100 # Hz
-    use_sim_time: true
+    use_sim_time: false
     joint_state_broadcaster:
       type: joint_state_broadcaster/JointStateBroadcaster
     simple_velocity_controller:
       type: velocity_controllers/JointGroupVelocityController
     diff_drive_controller:
       type: diff_drive_controller/DiffDriveController
-simple_velocity_controller:
-  ros__parameters:
-    joints: ["wheel_left_joint", "wheel_right_joint"]
 diff_drive_controller:
   ros__parameters:
     type: diff_drive_controller/DiffDriveController
@@ -33,18 +30,18 @@ diff_drive_controller:
     linear:
       x:
         has_velocity_limits: true
-        max_velocity: 1.0 # m/s
-        min_velocity: -1.0 # m/s
+        max_velocity: 0.2 # m/s
+        min_velocity: -0.2 # m/s
         has_acceleration_limits: true
-        max_acceleration: 0.8 # m/s^2
-        min_acceleration: -0.8 # m/s^2
+        max_acceleration: 0.4 # m/s^2
+        min_acceleration: -0.4 # m/s^2
         has_jerk_limits: false
-        max_jerk: 5.0 # m/s^3
+        max_jerk: 2.0 # m/s^3
     angular:
       z:
         has_velocity_limits: true
-        max_velocity: 1.7 # rad/s
+        max_velocity: 0.5 # rad/s
         has_acceleration_limits: true
-        max_acceleration: 1.5 # rad/s^2
+        max_acceleration: 0.75 # rad/s^2
         has_jerk_limits: false
-        max_jerk: 2.5 # rad/s^3
+        max_jerk: 1.5 # rad/s^3

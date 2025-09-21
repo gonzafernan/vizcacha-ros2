@@ -45,10 +45,10 @@ VizccInterface::on_init(const hardware_interface::HardwareInfo &hardware_info) {
       state_topic_, 10,
       [this](const sensor_msgs::msg::JointState::SharedPtr msg) {
         for (size_t i = 0; i < info_.joints.size(); i++) {
-          if (msg->name[i] == "left_wheel_joint") {
+          if (msg->name[i] == "wheel_left_joint") {
             position_states_[0] = msg->position[i];
             velocity_states_[0] = msg->velocity[i];
-          } else if (msg->name[i] == "right_wheel_joint") {
+          } else if (msg->name[i] == "wheel_right_joint") {
             position_states_[1] = msg->position[i];
             velocity_states_[1] = msg->velocity[i];
           }
@@ -102,6 +102,7 @@ hardware_interface::return_type VizccInterface::read(const rclcpp::Time &,
 hardware_interface::return_type
 VizccInterface::write(const rclcpp::Time &, const rclcpp::Duration &) {
   std_msgs::msg::Float32MultiArray msg;
+  msg.data.resize(velocity_commands_.size());
   for (size_t i = 0; i < info_.joints.size(); i++) {
     msg.data[i] = static_cast<float>(velocity_commands_[i]);
   }

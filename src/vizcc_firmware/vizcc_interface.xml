@@ -1,6 +1,7 @@
 <library path="vizcc_firmware">
-    <class name="vizcc_firmware/VizccInterface"
-        type="vizcc_firmware/VizccInterface"
+    <class
+        name="vizcc_firmware/VizccInterface"
+        type="vizcc_firmware::VizccInterface"
         base_class_type="hardware_interface::SystemInterface">
         <description>
             Vizcacha robot hardware interface.

@@ -18,8 +18,8 @@
         <xacro:unless value="$(arg is_sim)">
             <hardware>
                 <plugin>vizcc_firmware/VizccInterface</plugin>
-                <param name="cmd_topic"></param>
-                <param name="state_topic">/joint_state</param>
+                <param name="cmd_topic">/vizcc_mcu/wheel_vel_cmd</param>
+                <param name="state_topic">/vizcc_mcu/joint_states</param>
             </hardware>
         </xacro:unless>
 
