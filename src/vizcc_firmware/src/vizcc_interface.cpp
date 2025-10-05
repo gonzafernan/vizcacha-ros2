@@ -39,8 +39,10 @@ VizccInterface::on_init(const hardware_interface::HardwareInfo &hardware_info) {
   node_ = rclcpp::Node::make_shared("vizcc_diff_drive");
   cmd_topic_ = info_.hardware_parameters.at("cmd_topic");
   state_topic_ = info_.hardware_parameters.at("state_topic");
-  cmd_pub_ =
-      node_->create_publisher<std_msgs::msg::Float32MultiArray>(cmd_topic_, 10);
+  cmd_qos_.best_effort();
+  cmd_qos_.durability_volatile();
+  cmd_pub_ = node_->create_publisher<std_msgs::msg::Float32MultiArray>(
+      cmd_topic_, cmd_qos_);
   state_sub_ = node_->create_subscription<sensor_msgs::msg::JointState>(
       state_topic_, 10,
       [this](const sensor_msgs::msg::JointState::SharedPtr msg) {

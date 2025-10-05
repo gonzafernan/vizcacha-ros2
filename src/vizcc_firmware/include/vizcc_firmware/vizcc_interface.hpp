@@ -2,6 +2,7 @@
 #define VIZCC_INTERFACE_HPP
 
 #include <hardware_interface/system_interface.hpp>
+#include <rclcpp/qos.hpp>
 #include <rclcpp/rclcpp.hpp>
 #include <rclcpp_lifecycle/node_interfaces/lifecycle_node_interface.hpp>
 #include <vector>
@@ -45,6 +46,7 @@ private:
   std::string state_topic_;
   rclcpp::executors::SingleThreadedExecutor::SharedPtr exec_;
   std::thread spin_thread_;
+  rclcpp::QoS cmd_qos_{rclcpp::KeepLast(1)};
 };
 
 } // namespace vizcc_firmware

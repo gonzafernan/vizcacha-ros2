@@ -48,7 +48,8 @@ services:
   # Bring-up micro-ROS communication
   micro-ros-comm:
     extends: base
-    command: ros2 run micro_ros_agent micro_ros_agent serial -b 115200 --dev /dev/ttyACM0
+    command: ros2 run micro_ros_agent micro_ros_agent serial -b 115200 --dev /dev/ttyUSB0
+  # Run plotjuggler
   plotjuggler:
     extends: base
     command: ros2 run plotjuggler plotjuggler

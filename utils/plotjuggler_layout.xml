@@ -1,55 +1,55 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <root>
  <tabbed_widget parent="main_window" name="Main Window">
-  <Tab tab_name="imu" containers="1">
+  <Tab containers="1" tab_name="imu">
    <Container>
     <DockSplitter sizes="1" count="1" orientation="-">
      <DockSplitter sizes="0.333481;0.333038;0.333481" count="3" orientation="|">
       <DockSplitter sizes="0.500661;0.499339" count="2" orientation="-">
        <DockArea name="...">
-        <plot style="Lines" mode="TimeSeries" flip_x="false" flip_y="false">
-         <range top="0.397901" left="28.898170" right="33.895214" bottom="-0.604008"/>
+        <plot flip_y="false" style="Lines" mode="TimeSeries" flip_x="false">
+         <range top="0.475191" left="11.098902" bottom="-0.566794" right="15.999935"/>
          <limitY/>
-         <curve color="#1f77b4" name="/imu_publisher/angular_velocity/x"/>
+         <curve name="/imu_publisher/angular_velocity/x" color="#1f77b4"/>
         </plot>
        </DockArea>
        <DockArea name="...">
-        <plot style="Lines" mode="TimeSeries" flip_x="false" flip_y="false">
-         <range top="0.006427" left="28.898170" right="33.895214" bottom="-0.007159"/>
+        <plot flip_y="false" style="Lines" mode="TimeSeries" flip_x="false">
+         <range top="0.012158" left="11.098902" bottom="-0.006299" right="15.999935"/>
          <limitY/>
-         <curve color="#ff7f0e" name="/imu_publisher/linear_acceleration/x"/>
-        </plot>
-       </DockArea>
-      </DockSplitter>
-      <DockSplitter sizes="0.5;0.5" count="2" orientation="-">
-       <DockArea name="...">
-        <plot style="Lines" mode="TimeSeries" flip_x="false" flip_y="false">
-         <range top="0.904008" left="28.898170" right="33.895214" bottom="0.126527"/>
-         <limitY/>
-         <curve color="#d62728" name="/imu_publisher/angular_velocity/y"/>
-        </plot>
-       </DockArea>
-       <DockArea name="...">
-        <plot style="Lines" mode="TimeSeries" flip_x="false" flip_y="false">
-         <range top="-0.011078" left="28.898170" right="33.895214" bottom="-0.027740"/>
-         <limitY/>
-         <curve color="#f14cc1" name="/imu_publisher/linear_acceleration/y"/>
+         <curve name="/imu_publisher/linear_acceleration/x" color="#ff7f0e"/>
         </plot>
        </DockArea>
       </DockSplitter>
       <DockSplitter sizes="0.5;0.5" count="2" orientation="-">
        <DockArea name="...">
-        <plot style="Lines" mode="TimeSeries" flip_x="false" flip_y="false">
-         <range top="0.553435" left="28.898170" right="33.895214" bottom="0.072519"/>
+        <plot flip_y="false" style="Lines" mode="TimeSeries" flip_x="false">
+         <range top="0.687595" left="11.098902" bottom="0.022328" right="15.999935"/>
          <limitY/>
-         <curve color="#1ac938" name="/imu_publisher/angular_velocity/z"/>
+         <curve name="/imu_publisher/angular_velocity/y" color="#d62728"/>
         </plot>
        </DockArea>
        <DockArea name="...">
-        <plot style="Lines" mode="TimeSeries" flip_x="false" flip_y="false">
-         <range top="1.022296" left="28.898170" right="33.895214" bottom="1.008710"/>
+        <plot flip_y="false" style="Lines" mode="TimeSeries" flip_x="false">
+         <range top="-0.030835" left="11.098902" bottom="-0.048267" right="15.999935"/>
          <limitY/>
-         <curve color="#9467bd" name="/imu_publisher/linear_acceleration/z"/>
+         <curve name="/imu_publisher/linear_acceleration/y" color="#f14cc1"/>
+        </plot>
+       </DockArea>
+      </DockSplitter>
+      <DockSplitter sizes="0.5;0.5" count="2" orientation="-">
+       <DockArea name="...">
+        <plot flip_y="false" style="Lines" mode="TimeSeries" flip_x="false">
+         <range top="0.718321" left="11.098902" bottom="0.045038" right="15.999935"/>
+         <limitY/>
+         <curve name="/imu_publisher/angular_velocity/z" color="#1ac938"/>
+        </plot>
+       </DockArea>
+       <DockArea name="...">
+        <plot flip_y="false" style="Lines" mode="TimeSeries" flip_x="false">
+         <range top="1.030847" left="11.098902" bottom="1.006750" right="15.999935"/>
+         <limitY/>
+         <curve name="/imu_publisher/linear_acceleration/z" color="#9467bd"/>
         </plot>
        </DockArea>
       </DockSplitter>
@@ -57,23 +57,23 @@
     </DockSplitter>
    </Container>
   </Tab>
-  <Tab tab_name="joint state" containers="1">
+  <Tab containers="1" tab_name="joint state">
    <Container>
     <DockSplitter sizes="0.5;0.5" count="2" orientation="-">
      <DockArea name="...">
-      <plot style="Lines" mode="TimeSeries" flip_x="false" flip_y="false">
-       <range top="0.078842" left="28.912999" right="33.910214" bottom="-0.356752"/>
+      <plot flip_y="false" style="Lines" mode="TimeSeries" flip_x="false">
+       <range top="0.784492" left="11.113931" bottom="0.484228" right="16.014909"/>
        <limitY/>
-       <curve color="#f14cc1" name="/joint_state/left_wheel/position"/>
-       <curve color="#17becf" name="/joint_state/right_wheel/position"/>
+       <curve name="/vizcc_mcu/joint_states/left_wheel/position" color="#f14cc1"/>
+       <curve name="/vizcc_mcu/joint_states/right_wheel/position" color="#9467bd"/>
       </plot>
      </DockArea>
      <DockArea name="...">
-      <plot style="Lines" mode="TimeSeries" flip_x="false" flip_y="false">
-       <range top="0.100000" left="28.912999" right="33.910214" bottom="-0.100000"/>
+      <plot flip_y="false" style="Lines" mode="TimeSeries" flip_x="false">
+       <range top="0.000000" left="11.113931" bottom="-0.000000" right="16.014909"/>
        <limitY/>
-       <curve color="#9467bd" name="/joint_state/left_wheel/velocity"/>
-       <curve color="#bcbd22" name="/joint_state/right_wheel/velocity"/>
+       <curve name="/vizcc_mcu/joint_states/left_wheel/velocity" color="#17becf"/>
+       <curve name="/vizcc_mcu/joint_states/right_wheel/velocity" color="#bcbd22"/>
       </plot>
      </DockArea>
     </DockSplitter>
@@ -86,7 +86,7 @@
  <!-- - - - - - - - - - - - - - - -->
  <Plugins>
   <plugin ID="DataLoad CSV">
-   <parameters delimiter="0" time_axis=""/>
+   <parameters time_axis="" delimiter="0"/>
   </plugin>
   <plugin ID="DataLoad MCAP"/>
   <plugin ID="DataLoad ROS2 bags">
@@ -104,7 +104,7 @@
    <max_array_size value="100"/>
    <boolean_strings_to_number value="true"/>
    <remove_suffix_from_strings value="true"/>
-   <selected_topics value="/imu_publisher;/joint_state"/>
+   <selected_topics value="/imu_publisher;/vizcc_mcu/joint_states;/vizcc_mcu/wheel_vel_cmd;/diff_drive_controller/cmd_vel"/>
   </plugin>
   <plugin ID="UDP Server"/>
   <plugin ID="WebSocket Server"/>

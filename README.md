@@ -1,6 +1,12 @@
 
 # Vizcacha project
 
+To open a bash console inside the docker for development, start the dev service as follows:
+
+```bash
+docker compose run --rm dev bash
+```
+
 ## Software
 Environment setup following [Setup ROS 2 with VSCode and Docker](https://docs.ros.org/en/foxy/How-To-Guides/Setup-ROS-2-with-VSCode-and-Docker-Container.html)
 
